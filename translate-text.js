@@ -1,7 +1,7 @@
 require('dotenv').config();
 const request = require('request');
 const uuidv4 = require('uuid/v4');
-
+require('./language_recognition.js')
 /* Checks to see if the subscription key is available
 as an environment variable. If you are setting your subscription key as a
 string, then comment these lines out.
@@ -9,10 +9,10 @@ string, then comment these lines out.
 If you want to set your subscription key as a string, replace the value for
 the Ocp-Apim-Subscription-Key header as a string. */
 const subscriptionKey = process.env.TRANSLATOR_TEXT_KEY;
-let phrases = ['Hello', 'Good morning', 'Please', 'How much money',];
+let phrases = ['Hello', 'Good morning', 'Please', 'How much money'];
 
 function translate(language,phrases) {
-	for (i = 0; i <= phrases.length; i++) {
+	for (i = 0; i < phrases.length; i++) {
 
 		if (!subscriptionKey) {
 			throw new Error('Environment variable for your subscription key is not set.');
@@ -37,14 +37,35 @@ function translate(language,phrases) {
 			}],
 			json: true,
 		};
+
 		request(options, function (err, res, body) {
 			console.log(JSON.stringify(body, null, 5	));
+			console.log("--------------------------------");
 		});
 	}
 	
+	render() {
+		return (
+			<Row>
+				<Col size="md-12">
+					<Panel title="Phrases">
+						{this.state.phrases.length ? (
+							<List>
+								{this.state.phrases.map(phrases => (
+									<Phrases />
+								))}
+							</List>
+						) : (
+								<h2 className="text-center">{this.state.message}</h2>
+							)}
+					</Panel>
+				</Col>
+			</Row>
+		);
+	}
+
 }
-// translate("it",phrases);
-// translate("es", phrases);
+
 translate('es', phrases);
 
 
