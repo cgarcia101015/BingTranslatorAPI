@@ -9,11 +9,10 @@ string, then comment these lines out.
 If you want to set your subscription key as a string, replace the value for
 the Ocp-Apim-Subscription-Key header as a string. */
 const subscriptionKey = process.env.TRANSLATOR_TEXT_KEY;
-let phrases = ['Hello', 'Good morning', 'Please', 'How much money',];
+let phrases = [ 'Hello', 'Good morning', 'Please', 'How much money' ];
 
-function translate(language,phrases) {
+function translate(language, phrases) {
 	for (i = 0; i <= phrases.length; i++) {
-
 		if (!subscriptionKey) {
 			throw new Error('Environment variable for your subscription key is not set.');
 		}
@@ -24,27 +23,25 @@ function translate(language,phrases) {
 			url: 'translate',
 			qs: {
 				'api-version': '3.0',
-				'to': language
-
+				to: language
 			},
 			headers: {
 				'Ocp-Apim-Subscription-Key': subscriptionKey,
 				'Content-type': 'application/json',
 				'X-ClientTraceId': uuidv4().toString()
 			},
-			body: [{
-				'text': phrases[i],
-			}],
-			json: true,
+			body: [
+				{
+					text: phrases[i]
+				}
+			],
+			json: true
 		};
-		request(options, function (err, res, body) {
-			console.log(JSON.stringify(body, null, 5	));
+		request(options, function(err, res, body) {
+			console.log(JSON.stringify(body, null, 5));
 		});
 	}
-	
 }
 // translate("it",phrases);
 // translate("es", phrases);
-translate('es', phrases);
-
-
+translate('de', phrases);
