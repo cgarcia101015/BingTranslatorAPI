@@ -1,7 +1,7 @@
 require('dotenv').config();
 const request = require('request');
 const uuidv4 = require('uuid/v4');
-require('./language_recognition.js')
+require('./language_recognition');
 /* Checks to see if the subscription key is available
 as an environment variable. If you are setting your subscription key as a
 string, then comment these lines out.
