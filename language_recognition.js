@@ -10,8 +10,9 @@ function recogLang(ip) {
 
     return axios.get(queryURL).then(
         function (response) {
+            // console.log(response.data);
             // console.log(" Country Code: " + response.data.location.languages[0].code);
-            // console.log(" Language: " + response.data.location.languages[0].name);
+            console.log("English to " + response.data.location.languages[0].name);
             const countryCode = response.data.location.languages[0].code;
             const countryLanguage = response.data.location.languages[0].name;
 
