@@ -8,9 +8,9 @@ URL += "json";
 axios.get(URL).then(async response => {
     const geoLoc = await recogLang(response.data.ip);
 
-    const geoLoc = await recogLang("77.136.14.169");
+    // const geoLoc = await recogLang("77.136.14.169");
     console.log(geoLoc);
-    // translate(geoLoc.countryCode);
+    translate(geoLoc.countryCode);
 
 });
 
